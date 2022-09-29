@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { PanGestureHandlerProps } from "react-native-gesture-handler";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import {
+  Text,
   Pressable,
   Box,
   HStack,
@@ -11,7 +12,6 @@ import {
   useToken,
 } from "native-base";
 import AnimatedCheckbox from "react-native-checkbox-reanimated";
-import AnimatedTaskLabel from "./animated-task-label";
 import SwipableView from "./swipable-view";
 import { Feather } from "@expo/vector-icons";
 
@@ -117,14 +117,9 @@ const TaskItem = (props: Props) => {
             onBlur={onFinishEditing}
           />
         ) : (
-          <AnimatedTaskLabel
-            textColor={activeTextColor}
-            inactiveTextColor={doneTextColor}
-            strikethrough={isDone}
-            onPress={onPressLabel}
-          >
-            {subject}
-          </AnimatedTaskLabel>
+          <Pressable onPress={onPressLabel}>
+            <Text>{subject}</Text>
+          </Pressable>
         )}
       </HStack>
     </SwipableView>
