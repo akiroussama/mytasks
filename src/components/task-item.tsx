@@ -1,27 +1,15 @@
-import React, { useCallback } from "react";
-import { PanGestureHandlerProps } from "react-native-gesture-handler";
-import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
-import {
-  Text,
-  Pressable,
-  Box,
-  HStack,
-  useColorModeValue,
-  Icon,
-  Input,
-  useToken,
-} from "native-base";
+import React from "react";
+import { Text, Pressable, Box, HStack } from "native-base";
 import AnimatedCheckbox from "react-native-checkbox-reanimated";
 
 interface Props {
   isDone: boolean;
   onToggleCheckbox?: () => void;
-  onPressLabel?: () => void;
   subject: string;
 }
 
 const TaskItem = (props: Props) => {
-  const { isDone, onToggleCheckbox, subject, onPressLabel } = props;
+  const { isDone, onToggleCheckbox, subject } = props;
 
   return (
     <HStack alignItems="center" w="full">
@@ -35,10 +23,7 @@ const TaskItem = (props: Props) => {
           />
         </Pressable>
       </Box>
-
-      <Pressable onPress={onPressLabel}>
-        <Text>{subject}</Text>
-      </Pressable>
+      <Text>{subject}</Text>
     </HStack>
   );
 };
