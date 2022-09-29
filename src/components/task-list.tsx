@@ -5,11 +5,6 @@ import {
   ScrollView,
 } from "react-native-gesture-handler";
 import TaskItem from "./task-item";
-import { makeStyledComponent } from "../../utils/styled";
-
-const StyledView = makeStyledComponent(View);
-const StyledScrollView = makeStyledComponent(ScrollView);
-
 interface TaskItemData {
   id: string;
   subject: string;
@@ -38,8 +33,7 @@ export const AnimatedTaskItem = (props: TaskItemProps) => {
     onPressLabel(data);
   }, [data, onPressLabel]);
   return (
-    <StyledView
-      w="full"
+    <View
       from={{
         opacity: 0,
         scale: 0.5,
@@ -63,7 +57,7 @@ export const AnimatedTaskItem = (props: TaskItemProps) => {
         onToggleCheckbox={handleToggleCheckbox}
         onPressLabel={handlePressLabel}
       />
-    </StyledView>
+    </View>
   );
 };
 
@@ -72,7 +66,7 @@ export default function TaskList(props: TaskListProps) {
   const refScrollView = useRef(null);
 
   return (
-    <StyledScrollView ref={refScrollView} w="full">
+    <ScrollView ref={refScrollView}>
       <AnimatePresence>
         {data.map(item => (
           <AnimatedTaskItem
@@ -84,6 +78,6 @@ export default function TaskList(props: TaskListProps) {
           />
         ))}
       </AnimatePresence>
-    </StyledScrollView>
+    </ScrollView>
   );
 }
