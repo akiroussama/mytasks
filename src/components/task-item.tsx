@@ -16,73 +16,23 @@ import SwipableView from "./swipable-view";
 import { Feather } from "@expo/vector-icons";
 
 interface Props extends Pick<PanGestureHandlerProps, "simultaneousHandlers"> {
-  isEditing: boolean;
   isDone: boolean;
   onToggleCheckbox?: () => void;
   onPressLabel?: () => void;
-  onRemove?: () => void;
-  onChangeSubject?: (subject: string) => void;
-  onFinishEditing?: () => void;
   subject: string;
 }
 
 const TaskItem = (props: Props) => {
-  const {
-    isEditing,
-    isDone,
-    onToggleCheckbox,
-    subject,
-    onPressLabel,
-    onRemove,
-    onChangeSubject,
-    onFinishEditing,
-    simultaneousHandlers,
-  } = props;
-
-  const highlightColor = useToken(
-    "colors",
-    useColorModeValue("blue.500", "blue.400")
-  );
-  const boxStroke = useToken(
-    "colors",
-    useColorModeValue("muted.300", "muted.500")
-  );
-
-  const checkmarkColor = useToken(
-    "colors",
-    useColorModeValue("white", "white")
-  );
-
-  const activeTextColor = useToken(
-    "colors",
-    useColorModeValue("darkText", "lightText")
-  );
-  const doneTextColor = useToken(
-    "colors",
-    useColorModeValue("muted.400", "muted.600")
-  );
-
-  const handleChangeSubject = useCallback(
-    (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-      onChangeSubject && onChangeSubject(e.nativeEvent.text);
-    },
-    [onChangeSubject]
-  );
+  const { isDone, onToggleCheckbox, subject, onPressLabel } = props;
 
   return (
-    <HStack
-      alignItems="center"
-      w="full"
-      px={4}
-      py={2}
-      bg={useColorModeValue("warmGray.50", "primary.900")}
-    >
+    <HStack alignItems="center" w="full">
       <Box width={30} height={30} mr={2}>
         <Pressable onPress={onToggleCheckbox}>
           <AnimatedCheckbox
-            highlightColor={highlightColor}
-            checkmarkColor={checkmarkColor}
-            boxOutlineColor={boxStroke}
+            highlightColor="#4444ff"
+            checkmarkColor="#ffffff"
+            boxOutlineColor="#4444ff"
             checked={isDone}
           />
         </Pressable>

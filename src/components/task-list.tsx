@@ -18,54 +18,25 @@ interface TaskItemData {
 
 interface TaskListProps {
   data: Array<TaskItemData>;
-  editingItemId: string | null;
   onToggleItem: (item: TaskItemData) => void;
-  onChangeSubject: (item: TaskItemData, newSubject: string) => void;
-  onFinishEditing: (item: TaskItemData) => void;
   onPressLabel: (item: TaskItemData) => void;
-  onRemoveItem: (item: TaskItemData) => void;
 }
 
 interface TaskItemProps
   extends Pick<PanGestureHandlerProps, "simultaneousHandlers"> {
   data: TaskItemData;
-  isEditing: boolean;
   onToggleItem: (item: TaskItemData) => void;
-  onChangeSubject: (item: TaskItemData, newSubject: string) => void;
-  onFinishEditing: (item: TaskItemData) => void;
   onPressLabel: (item: TaskItemData) => void;
-  onRemove: (item: TaskItemData) => void;
 }
 
 export const AnimatedTaskItem = (props: TaskItemProps) => {
-  const {
-    simultaneousHandlers,
-    data,
-    isEditing,
-    onToggleItem,
-    onChangeSubject,
-    onFinishEditing,
-    onPressLabel,
-    onRemove,
-  } = props;
+  const { simultaneousHandlers, data, onToggleItem, onPressLabel } = props;
   const handleToggleCheckbox = useCallback(() => {
     onToggleItem(data);
   }, [data, onToggleItem]);
-  const handleChangeSubject = useCallback(
-    (subject: string) => {
-      onChangeSubject(data, subject);
-    },
-    [data, onChangeSubject]
-  );
-  const handleFinishEditing = useCallback(() => {
-    onFinishEditing(data);
-  }, [data, onFinishEditing]);
   const handlePressLabel = useCallback(() => {
     onPressLabel(data);
   }, [data, onPressLabel]);
-  const handleRemove = useCallback(() => {
-    onRemove(data);
-  }, [data, onRemove]);
   return (
     <StyledView
       w="full"
@@ -89,27 +60,15 @@ export const AnimatedTaskItem = (props: TaskItemProps) => {
         simultaneousHandlers={simultaneousHandlers}
         subject={data.subject}
         isDone={data.done}
-        isEditing={isEditing}
         onToggleCheckbox={handleToggleCheckbox}
-        onChangeSubject={handleChangeSubject}
-        onFinishEditing={handleFinishEditing}
         onPressLabel={handlePressLabel}
-        onRemove={handleRemove}
       />
     </StyledView>
   );
 };
 
 export default function TaskList(props: TaskListProps) {
-  const {
-    data,
-    editingItemId,
-    onToggleItem,
-    onChangeSubject,
-    onFinishEditing,
-    onPressLabel,
-    onRemoveItem,
-  } = props;
+  const { data, onToggleItem, onPressLabel } = props;
   const refScrollView = useRef(null);
 
   return (
@@ -120,12 +79,8 @@ export default function TaskList(props: TaskListProps) {
             key={item.id}
             data={item}
             simultaneousHandlers={refScrollView}
-            isEditing={item.id === editingItemId}
             onToggleItem={onToggleItem}
-            onChangeSubject={onChangeSubject}
-            onFinishEditing={onFinishEditing}
             onPressLabel={onPressLabel}
-            onRemove={onRemoveItem}
           />
         ))}
       </AnimatePresence>
