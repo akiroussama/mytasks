@@ -1,5 +1,10 @@
 import Main from "./src/screens/main";
+import { NativeBaseProvider } from "native-base";
 
 export default function App() {
-  return <Main></Main>;
+  return (
+    <NativeBaseProvider>
+      <Main></Main>
+    </NativeBaseProvider>
+  );
 }
