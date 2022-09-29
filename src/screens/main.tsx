@@ -1,16 +1,15 @@
 import React, { useCallback, useState } from "react";
 import { Box, Icon, VStack, useColorModeValue, Fab } from "native-base";
 import TaskList from "../components/task-list";
-import shortid from "shortid";
 
 const initialData = [
   {
-    id: shortid.generate(),
+    id: 1,
     subject: "Buy movie tickets for Friday",
     done: false,
   },
   {
-    id: shortid.generate(),
+    id: 2,
     subject: "Make a React Native tutorial",
     done: false,
   },
