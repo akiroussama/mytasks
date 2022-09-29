@@ -1,5 +1,5 @@
 import { Text, VStack, Center } from "native-base";
-export default function MyComponent ()  {
+export default function WildersComponent() {
   return (
     <Center flex={1}>
       <VStack space={1} alignItems="center">
