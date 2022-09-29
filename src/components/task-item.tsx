@@ -12,10 +12,8 @@ import {
   useToken,
 } from "native-base";
 import AnimatedCheckbox from "react-native-checkbox-reanimated";
-import SwipableView from "./swipable-view";
-import { Feather } from "@expo/vector-icons";
 
-interface Props extends Pick<PanGestureHandlerProps, "simultaneousHandlers"> {
+interface Props {
   isDone: boolean;
   onToggleCheckbox?: () => void;
   onPressLabel?: () => void;

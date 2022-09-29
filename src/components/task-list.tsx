@@ -1,9 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { AnimatePresence, View } from "moti";
-import {
-  PanGestureHandlerProps,
-  ScrollView,
-} from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import TaskItem from "./task-item";
 interface TaskItemData {
   id: string;
@@ -17,15 +14,14 @@ interface TaskListProps {
   onPressLabel: (item: TaskItemData) => void;
 }
 
-interface TaskItemProps
-  extends Pick<PanGestureHandlerProps, "simultaneousHandlers"> {
+interface TaskItemProps {
   data: TaskItemData;
   onToggleItem: (item: TaskItemData) => void;
   onPressLabel: (item: TaskItemData) => void;
 }
 
 export const AnimatedTaskItem = (props: TaskItemProps) => {
-  const { simultaneousHandlers, data, onToggleItem, onPressLabel } = props;
+  const { data, onToggleItem, onPressLabel } = props;
   const handleToggleCheckbox = useCallback(() => {
     onToggleItem(data);
   }, [data, onToggleItem]);
@@ -51,7 +47,6 @@ export const AnimatedTaskItem = (props: TaskItemProps) => {
       }}
     >
       <TaskItem
-        simultaneousHandlers={simultaneousHandlers}
         subject={data.subject}
         isDone={data.done}
         onToggleCheckbox={handleToggleCheckbox}
