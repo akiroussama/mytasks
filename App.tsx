@@ -1,10 +1,12 @@
-import Main from "./src/screens/main";
 import { NativeBaseProvider } from "native-base";
-
+import MyDrawer from "./src/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
   return (
     <NativeBaseProvider>
-      <Main></Main>
+      <NavigationContainer>
+        <MyDrawer></MyDrawer>
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }
